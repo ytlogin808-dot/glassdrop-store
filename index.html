@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlassDrop | Modern Dropshipping</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #7c3aed;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(30, 30, 46, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --gradient-bg: linear-gradient(135deg, #0f0c29, #1a1a2e);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-light);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Glass Effect */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 12, 41, 0.9);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav { display: flex; gap: 30px; align-items: center; }
+        
+        .nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav a:hover { color: var(--text-light); }
+        
+        .nav a.active { color: var(--text-light); }
+        
+        .nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .cart-icon { position: relative; cursor: pointer; }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            margin: 30px 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Buttons */
+        .btn {
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 12px;
+            color: white;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: rgba(124, 58, 237, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(124, 58, 237, 0.4);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.6);
+        }
+        
+        /* Products */
+        .products-section { margin: 60px 0; }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            transition: var(--transition);
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        
+        .product-img {
+            height: 220px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 3rem;
+        }
+        
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        /* Forms */
+        .form-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+        }
+        
+        .form-group { margin-bottom: 25px; }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(124,58,237,0.3);
+        }
+        
+        /* COD Info Box */
+        .cod-info {
+            background: rgba(124, 58, 237, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        /* Cart */
+        .cart-page, .checkout-page, .admin-page { display: none; }
+        
+        .cart-items { margin-bottom: 30px; }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .cart-summary {
+            padding: 30px;
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .summary-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Admin */
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .orders-table th, .orders-table td {
+            padding: 18px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .orders-table th {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent);
+        }
+        
+        .status-completed {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .header-content { flex-direction: column; gap: 20px; }
+            .nav { flex-wrap: wrap; justify-content: center; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+            .hero h1 { font-size: 2.2rem; }
+        }
+        
+        @media (max-width: 600px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+            .cart-item { flex-direction: column; gap: 15px; text-align: center; }
+            .orders-table { display: block; overflow-x: auto; }
+        }
+        
+        /* Page Navigation */
+        .page { display: block; }
+        .page.hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="glass">
+        <div class="container header-content">
+            <div class="logo">GlassDrop</div>
+            <nav class="nav">
+                <a href="#" class="active" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('products')">Products</a>
+                <a href="#" onclick="showPage('cart')">
+                    <span class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </span>
+                </a>
+                <a href="#" onclick="showPage('checkout')">Checkout</a>
+                <a href="#" onclick="showPage('admin')">Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home-page" class="page">
+            <div class="hero">
+                <h1>Premium Dropshipping Store</h1>
+                <p>Experience modern glassmorphism design with neon glow effects. Premium products with worldwide shipping.</p>
+                <button class="btn btn-primary" onclick="showPage('products')">
+                    <i class="fas fa-shopping-bag"></i> Shop Now
+                </button>
+            </div>
+
+            <div class="products-section">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="products-grid" id="featuredProducts"></div>
+            </div>
+        </section>
+
+        <!-- Products Page -->
+        <section id="products-page" class="page hidden">
+            <div class="products-section">
+                <h2 class="section-title">All Products</h2>
+                <div class="products-grid" id="allProducts"></div>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section id="cart-page" class="page hidden">
+            <div class="products-section">
+                <h2 class="section-title">Your Shopping Cart</h2>
+                <div class="glass">
+                    <div class="cart-items" id="cartItems"></div>
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="cartSubtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span>$5.99</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax:</span>
+                            <span id="cartTax">$0.00</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Total:</span>
+                            <span id="cartTotal">$5.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="showPage('checkout')" style="width: 100%; padding: 16px; margin-top: 20px;">
+                            <i class="fas fa-arrow-right"></i> Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Page -->
+        <section id="checkout-page" class="page hidden">
+            <div class="products-section">
+                <h2 class="section-title">Checkout</h2>
+                <div class="glass form-container">
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="customerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Shipping Address</label>
+                            <textarea class="form-input" id="customerAddress" rows="3" required></textarea>
+                        </div>
+                        
+                        <!-- COD INFO BOX (ADDED YOUR DETAILS HERE) -->
+                        <div class="form-group cod-info">
+                            <h4 style="margin-bottom: 15px; color: var(--primary);">
+                                <i class="fas fa-info-circle"></i> Cash on Delivery Info
+                            </h4>
+                            <div style="color: var(--text-muted);">
+                                <p><strong>Delivery Address:</strong> Mirpur-10, Dhaka</p>
+                                <p><strong>Contact for Delivery:</strong> 01712345678</p>
+                                <p><strong>Delivery Time:</strong> 3-5 business days</p>
+                                <p><strong>COD Charge:</strong> ৳60 (Dhaka), ৳120 (Outside Dhaka)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-input" id="paymentMethod" required>
+                                <option value="cod">Cash on Delivery</option>
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Order Summary</label>
+                            <div class="glass" style="padding: 20px; background: rgba(0,0,0,0.1);">
+                                <div id="orderSummary"></div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+                            <i class="fas fa-check-circle"></i> Place Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Page -->
+        <section id="admin-page" class="page hidden">
+            <div class="products-section">
+                <h2 class="section-title">Admin Dashboard</h2>
+                
+                <!-- Admin Note (ADDED YOUR DETAILS HERE) -->
+                <div class="glass" style="padding: 20px; margin-bottom: 30px; background: rgba(6, 182, 212, 0.1);">
+                    <h4 style="margin-bottom: 10px; color: var(--secondary);">
+                        <i class="fas fa-exclamation-circle"></i> Important Notes for COD Orders:
+                    </h4>
+                    <ul style="color: var(--text-muted); padding-left: 20px;">
+                        <li>Call customer before delivery: 01712345678</li>
+                        <li>Delivery charge: ৳60-৳120</li>
+                        <li>Address: Mirpur-10, Dhaka</li>
+                        <li>Delivery time: 3-5 business days</li>
+                    </ul>
+                </div>
+                
+                <div class="glass">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTable"></tbody>
+                    </table>
+                    <div style="padding: 30px; text-align: center;">
+                        <button class="btn" onclick="clearOrders()">
+                            <i class="fas fa-trash"></i> Clear All Orders
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (ADDED YOUR DETAILS HERE) -->
+    <footer class="glass">
+        <div class="container">
+            <p>&copy; 2023 GlassDrop Dropshipping | Modern Glassmorphism E-commerce</p>
+            
+            <div class="contact-info">
+                <h4 style="margin-bottom: 10px; font-size: 1rem;">Contact & Payment Details:</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 5px;">
+                    <i class="fas fa-user"></i> Owner: Your Name
+                </p>
+                <p style="font-size: 0.9rem; margin-bottom: 5px;">
+                    <i class="fas fa-phone"></i> Phone: 01712345678
+                </p>
+                <p style="font-size: 0.9rem; margin-bottom: 5px;">
+                    <i class="fas fa-map-marker-alt"></i> Address: Mirpur-10, Dhaka-1216
+                </p>
+                <p style="font-size: 0.9rem; margin-bottom: 5px;">
+                    <i class="fas fa-wallet"></i> bKash: 01712345678 (Personal)
+                </p>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+              <script>
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Wireless Earbuds Pro",
+                description: "Noise cancelling wireless earbuds with 30hr battery life",
+                price: 79.99,
+                emoji: "🎧",
+                featured: true
+            },
+            {
+                id: 2,
+                name: "Smart Fitness Watch",
+                description: "Heart rate monitor with GPS and sleep tracking",
+                price: 149.99,
+                emoji: "⌚",
+                featured: true
+            },
+            {
+                id: 3,
+                name: "Power Bank 30000mAh",
+                description: "Fast charging power bank for all devices",
+                price: 59.99,
+                emoji: "🔋",
+                featured: true
+            },
+            {
+                id: 4,
+                name: "LED Desk Lamp",
+                description: "Adjustable lamp with wireless charging pad",
+                price: 49.99,
+                emoji: "💡",
+                featured: false
+            },
+            {
+                id: 5,
+                name: "Running Shoes",
+                description: "Lightweight breathable running shoes",
+                price: 89.99,
+                emoji: "👟",
+                featured: false
+            },
+            {
+                id: 6,
+                name: "Yoga Mat Premium",
+                description: "Non-slip yoga mat with carrying strap",
+                price: 34.99,
+                emoji: "🧘",
+                featured: false
+            },
+            {
+                id: 7,
+                name: "Water Bottle",
+                description: "Insulated stainless steel water bottle",
+                price: 29.99,
+                emoji: "💧",
+                featured: false
+            },
+            {
+                id: 8,
+                name: "Gaming Mouse",
+                description: "Wireless gaming mouse with RGB lights",
+                price: 79.99,
+                emoji: "🖱️",
+                featured: false
+            }
+        ];
+
+        // Cart and Orders
+        let cart = [];
+        let orders = [];
+
+        // Your Details (CHANGE THESE TO YOUR DETAILS)
+        const YOUR_DETAILS = {
+            phone: "01712345678",
+            address: "Mirpur-10, Dhaka",
+            deliveryTime: "3-5 business days",
+            codChargeDhaka: "৳60",
+            codChargeOutside: "৳120",
+            ownerName: "Your Name",
+            email: "contact@glassdrop.com",
+            bKash: "01712345678 (Personal)",
+            bankDetails: "Your Bank Details"
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+        });
+
+        function initApp() {
+            loadData();
+            renderProducts();
+            updateCartCount();
+            setupEventListeners();
+            updateYourDetails();
+        }
+
+        // Update your details in the page
+        function updateYourDetails() {
+            // Update COD info box
+            document.querySelector('.cod-info p:nth-child(1)').innerHTML = 
+                `<strong>Delivery Address:</strong> ${YOUR_DETAILS.address}`;
+            document.querySelector('.cod-info p:nth-child(2)').innerHTML = 
+                `<strong>Contact for Delivery:</strong> ${YOUR_DETAILS.phone}`;
+            
+            // Update admin note
+            document.querySelector('.admin-page ul li:nth-child(1)').textContent = 
+                `Call customer before delivery: ${YOUR_DETAILS.phone}`;
+            document.querySelector('.admin-page ul li:nth-child(3)').textContent = 
+                `Address: ${YOUR_DETAILS.address}`;
+            
+            // Update footer
+            document.querySelector('.contact-info p:nth-child(2)').innerHTML = 
+                `<i class="fas fa-phone"></i> Phone: ${YOUR_DETAILS.phone}`;
+            document.querySelector('.contact-info p:nth-child(3)').innerHTML = 
+                `<i class="fas fa-map-marker-alt"></i> Address: ${YOUR_DETAILS.address}`;
+            document.querySelector('.contact-info p:nth-child(4)').innerHTML = 
+                `<i class="fas fa-wallet"></i> bKash: ${YOUR_DETAILS.bKash}`;
+            document.querySelector('.contact-info p:nth-child(1)').innerHTML = 
+                `<i class="fas fa-user"></i> Owner: ${YOUR_DETAILS.ownerName}`;
+            document.querySelector('.contact-info p:nth-child(5)').innerHTML = 
+                `<i class="fas fa-credit-card"></i> Bank: ${YOUR_DETAILS.bankDetails}`;
+        }
+
+        // Load from localStorage
+        function loadData() {
+            // Load cart
+            const savedCart = localStorage.getItem('glassdrop_cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+            
+            // Load orders
+            const savedOrders = localStorage.getItem('glassdrop_orders');
+            if (savedOrders) {
+                orders = JSON.parse(savedOrders);
+            }
+            
+            // Sample orders if empty
+            if (orders.length === 0) {
+                orders = [
+                    {
+                        id: 1001,
+                        customer: "John Smith",
+                        product: "Wireless Earbuds Pro × 2",
+                        quantity: 2,
+                        total: 159.98,
+                        date: "2023-10-15",
+                        status: "completed"
+                    },
+                    {
+                        id: 1002,
+                        customer: "Emma Johnson",
+                        product: "Smart Fitness Watch × 1",
+                        quantity: 1,
+                        total: 149.99,
+                        date: "2023-10-18",
+                        status: "completed"
+                    },
+                    {
+                        id: 1003,
+                        customer: "Michael Brown",
+                        product: "LED Desk Lamp × 1",
+                        quantity: 1,
+                        total: 49.99,
+                        date: "2023-10-20",
+                        status: "pending"
+                    }
+                ];
+                saveOrders();
+            }
+        }
+
+        // Save to localStorage
+        function saveCart() {
+            localStorage.setItem('glassdrop_cart', JSON.stringify(cart));
+        }
+
+        function saveOrders() {
+            localStorage.setItem('glassdrop_orders', JSON.stringify(orders));
+        }
+
+        // Show different pages
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show selected page
+            document.getElementById(pageName + '-page').classList.remove('hidden');
+            
+            // Update active nav
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.nav a[onclick="showPage('${pageName}')"]`).classList.add('active');
+            
+            // Update page content
+            if (pageName === 'cart') {
+                renderCart();
+            } else if (pageName === 'checkout') {
+                renderOrderSummary();
+            } else if (pageName === 'admin') {
+                renderOrders();
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Checkout form submission
+            document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                placeOrder();
+            });
+        }
+
+        // Render products
+        function renderProducts() {
+            const featuredGrid = document.getElementById('featuredProducts');
+            const allGrid = document.getElementById('allProducts');
+            
+            featuredGrid.innerHTML = '';
+            allGrid.innerHTML = '';
+            
+            // Featured products
+            products.filter(p => p.featured).forEach(product => {
+                featuredGrid.appendChild(createProductCard(product));
+            });
+            
+            // All products
+            products.forEach(product => {
+                allGrid.appendChild(createProductCard(product));
+            });
+        }
+
+        // Create product card
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card glass';
+            card.innerHTML = `
+                <div class="product-img">${product.emoji}</div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name}</h3>
+                    <p class="product-desc">${product.description}</p>
+                    <div class="product-price">$${product.price.toFixed(2)}</div>
+                    <button class="btn" onclick="addToCart(${product.id})" style="width: 100%;">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    emoji: product.emoji,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            updateCartCount();
+            
+            // Show feedback
+            alert(`${product.name} added to cart!`);
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = total;
+        }
+
+        // Render cart
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h3 style="margin-bottom: 20px;">Your cart is empty</h3>
+                        <button class="btn" onclick="showPage('products')">
+                            <i class="fas fa-shopping-bag"></i> Browse Products
+                        </button>
+                    </div>
+                `;
+                updateCartTotal();
+                return;
+            }
+            
+            let html = '';
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                html += `
+                    <div class="cart-item">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span style="font-size: 1.8rem;">${item.emoji}</span>
+                            <div>
+                                <h4 style="margin-bottom: 5px;">${item.name}</h4>
+                                <p style="color: var(--text-muted);">
+                                    $${item.price.toFixed(2)} × ${item.quantity}
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <span style="font-weight: 700;">$${itemTotal.toFixed(2)}</span>
+                            <button class="btn" onclick="removeFromCart(${index})" style="padding: 8px 12px;">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            updateCartTotal();
+        }
+
+        // Remove from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartCount();
+            renderCart();
+        }
+
+        // Update cart total
+        function updateCartTotal() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = cart.length > 0 ? 5.99 : 0;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+            
+            document.getElementById('cartSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cartTax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Render order summary for checkout
+        function renderOrderSummary() {
+            const container = document.getElementById('orderSummary');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p>Your cart is empty</p>';
+                return;
+            }
+            
+            let html = '';
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                html += `
+                    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border);">
+                        <span>${item.name} × ${item.quantity}</span>
+                        <span>$${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = cart.length > 0 ? 5.99 : 0;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+            
+            html += `
+                <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border);">
+                    <span>Subtotal</span>
+                    <span>$${subtotal.toFixed(2)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border);">
+                    <span>Shipping</span>
+                    <span>$${shipping.toFixed(2)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border);">
+                    <span>Tax (8%)</span>
+                    <span>$${tax.toFixed(2)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 10px 0; font-weight: 700; font-size: 1.1rem;">
+                    <span>Total</span>
+                    <span>$${total.toFixed(2)}</span>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        // Place order
+        function placeOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            if (!name || !phone || !address) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            // Create order
+            const orderId = Date.now();
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = 5.99;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+            
+            const newOrder = {
+                id: orderId,
+                customer: name,
+                product: cart.map(item => `${item.name} × ${item.quantity}`).join(', '),
+                quantity: cart.reduce((sum, item) => sum + item.quantity, 0),
+                total: total.toFixed(2),
+                date: new Date().toISOString().split('T')[0],
+                status: 'pending',
+                phone: phone,
+                address: address,
+                payment: paymentMethod
+            };
+            
+            // Add to orders
+            orders.unshift(newOrder);
+            saveOrders();
+            
+            // Clear cart
+            cart = [];
+            saveCart();
+            updateCartCount();
+            
+            // Reset form
+            document.getElementById('checkoutForm').reset();
+            
+            // Show success with YOUR DETAILS
+            alert(`✅ Order #${orderId} placed successfully!\n\n📞 Contact us: ${YOUR_DETAILS.phone}\n📍 Address: ${YOUR_DETAILS.address}\n⏰ Delivery: ${YOUR_DETAILS.deliveryTime}\n💰 COD Charge: ${YOUR_DETAILS.codChargeDhaka}-${YOUR_DETAILS.codChargeOutside}\n\nThank you for shopping with GlassDrop!`);
+            
+            // Update orders table
+            renderOrders();
+            
+            // Go to admin
+            showPage('admin');
+        }
+
+        // Render orders in admin
+        function renderOrders() {
+            const container = document.getElementById('ordersTable');
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 40px;">
+                            No orders yet
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            let html = '';
+            orders.forEach(order => {
+                html += `
+                    <tr>
+                        <td>#${order.id}</td>
+                        <td>${order.customer}</td>
+                        <td>${order.product}</td>
+                        <td>${order.quantity}</td>
+                        <td>$${order.total}</td>
+                        <td>${order.date}</td>
+                        <td>
+                            <span class="status ${order.status === 'completed' ? 'status-completed' : 'status-pending'}">
+                                ${order.status}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Clear all orders
+        function clearOrders() {
+            if (confirm('Are you sure you want to clear all orders? This cannot be undone.')) {
+                orders = [];
+                saveOrders();
+                renderOrders();
+            }
+        }
+    </script>
+</body>
+</html>
